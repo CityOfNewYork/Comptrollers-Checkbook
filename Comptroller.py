@@ -47,7 +47,17 @@ class Budget:
 
     def add_criteria(self,name,valGlobDate,endDate=''):
         '''
-        object.add_criteria(criteria_name,value/startDate,endDate(OPTIONAL))
+        Values: object.add_criteria(crit_name,value))
+        Ranges: object.add_criteria(crit_name,startDate,endDate)
+
+
+        Values:
+        max_records , record_from , year , budget_code, 
+        agency_code , department_code , expense_category, 
+
+        Ranges:
+        adopted , modified , pre_encumbered , encumbered,
+        accrued_expense , cash_expense , post_adjustment
         '''
         try:
             criteria_type = self.valGlobRange[name]
@@ -77,7 +87,7 @@ class Budget:
                                         "</name><type>value</type><value>"
                                          + value + "</value></criteria>")})
         else:
-            print 'Invalid Criteria. Please check your information again:',name
+            print 'Invalid Criteria. Please check your information again:'
 
     def create_range_criteria(self,name,start,end):
         validation_type = self.format_dict[name]
@@ -108,12 +118,22 @@ class Budget:
     def add_response_column(self,name):
         '''
         object.create_response_column('name')
+
+        Creates a Response Column to filter search results
+
+        Response Columns:        
+        agency , department , expense_category, 
+        budget_code , budget_name , pre_encumbered, 
+        accrued_expense , year , post_adjustment,
+        modified , adopted , encumbered , cash_expense
         '''
         self.response_columns.update({name:name})
 
     def del_reponse_column(self,name):
         '''
         object.del_response_column('name')
+
+        Deletes a response column that was created for a specific object
         '''
         try:
             del self.response_columns[name]
@@ -124,6 +144,8 @@ class Budget:
     def delete_criteria(self,name):
         '''
         object.del_criteria('name')
+
+        Deletes a criteria that was created for a specific object
         '''
         try:
             if name == 'max_records' or name == 'record_from':
@@ -137,6 +159,8 @@ class Budget:
     def getBudget(self):
         '''
         Call to Budget API: object.getBudget()
+
+        Returns the results as XML text
         '''
         budgetString = ('<request><type_of_data>Budget</type_of_data>')
         #Adding global criteria filters
@@ -207,7 +231,22 @@ class Contracts:
 
     def add_criteria(self,name,valGlobDate,endDate=''):
         '''
-        object.add_criteria(criteria_name,value/startDate,endDate(OPTIONAL))
+        Values: object.add_criteria(crit_name,value))
+        Ranges: object.add_criteria(crit_name,startDate,endDate)
+
+        Required Values:
+        status(Value options: active, pending or registered)
+        category(Value options: expense OR revenue)
+        
+
+        Values:
+        max_records , record_from , fiscal_year OR calendar_year,
+        vendor_code , contract_type , agency_code , contract_id,
+        award_method 
+        
+        Ranges:
+        current_amount , start_date , end_date,
+        registration_date , received_date
         '''
         try:
             criteria_type = self.valGlobRange[name]
@@ -272,12 +311,37 @@ class Contracts:
     def add_response_column(self,name):
         '''
         object.create_response_column('name')
+
+        Creates a Response Column to filter search results
+
+        Response Columns:
+
+        -----All Statuses & Categories:-----
+        contract_id , purpose , version ,
+        parent_contract , original_amount,
+        current amount, apt_pin , vendor,
+        agency , contract_type , award_method,
+        start_date , end_date , pin,
+        contract_industry , document_code
+
+        -----Status:Active & Registered - Category:Expense:-----
+        expense_category , spend_to_date
+        registration_date
+
+        -----Status:Active & Registered - Category: Revenue:-----
+        year
+
+        -----Status:Pending - Category: Expense & Revenue:-----
+        original_modified
+
         '''
         self.response_columns.update({name:name})
 
     def del_reponse_column(self,name):
         '''
         object.del_response_column('name')
+
+        Delete a response column filter for a specific object
         '''
         try:
             del self.response_columns[name]
@@ -288,6 +352,8 @@ class Contracts:
     def delete_criteria(self,name):
         '''
         object.del_criteria('name')
+
+        Delete a criteria filter for a specific object
         '''
         try:
             if name == 'max_records' or name == 'record_from':
@@ -301,6 +367,10 @@ class Contracts:
     def getContracts(self):
         '''
         Call to Contracts API: object.getBudget()
+
+        Get Contracts information for a specific object
+
+        Returns text in XML format
         '''
         cString = ('<request><type_of_data>Contracts</type_of_data>')
         #Adding global criteria filters
@@ -377,7 +447,18 @@ class Payroll:
                                     
     def add_criteria(self,name,valGlobDate,endDate=''):
         '''
-        object.add_criteria(criteria_name,value/startDate,endDate(OPTIONAL))
+        Values: object.add_criteria(crit_name,value))
+        Ranges: object.add_criteria(crit_name,startDate,endDate)
+
+
+        Values:
+        max_records , record_from , fiscal_year OR calendar year,
+        agency_code , pay_frequency* , title*,
+        pay_date , amount AND amount_type
+
+        Ranges:
+        gross_pay, base_pay, other_payments,
+        overtime_payments , gross_pay_ytd
         '''
         try:
             criteria_type = self.valGlobRange[name]
@@ -442,12 +523,21 @@ class Payroll:
     def add_response_column(self,name):
         '''
         object.create_response_column('name')
+
+        Response Columns:
+        agency , fiscal_year , pay_frequency,
+        hourly_rate, gross_pay, title,
+        pay_date , base_pay, other_payments,
+        overtime_payments, gross_pay_ytd,
+        calendar_year, annual_salary
         '''
         self.response_columns.update({name:name})
 
     def del_reponse_column(self,name):
         '''
         object.del_response_column('name')
+
+        Delete a response column filter for a specific object
         '''
         try:
             del self.response_columns[name]
@@ -458,6 +548,8 @@ class Payroll:
     def delete_criteria(self,name):
         '''
         object.del_criteria('name')
+
+        Delete a criteria filter for a specific object
         '''
         try:
             if name == 'max_records' or name == 'record_from':
@@ -471,6 +563,10 @@ class Payroll:
     def getPayroll(self):
         '''
         Call to Payroll API: object.getPayroll()
+
+        Get Payroll information
+
+        Returns text in XML format
         '''
         payrollString = ('<request><type_of_data>Payroll</type_of_data>')
         #Adding global criteria filters
@@ -534,7 +630,18 @@ class Revenue:
 
     def add_criteria(self,name,valGlobDate,endDate=''):
         '''
-        object.add_criteria(criteria_name,value/startDate,endDate(OPTIONAL))
+        Values: object.add_criteria(crit_name,value))
+        Ranges: object.add_criteria(crit_name,startDate,endDate)
+
+
+        Values:
+        max_records , record_from , budget_fiscal_year,
+        fiscal_year, agency_code, revenue_class,
+        fund_class, funding_class, revenue_category,
+        revenue_source
+        
+        Ranges:
+        adopted, modified, recognized
         '''
         try:
             criteria_type = self.valGlobRange[name]
@@ -599,12 +706,20 @@ class Revenue:
     def add_response_column(self,name):
         '''
         object.create_response_column('name')
+
+        Response Columns:
+        agency, fiscal_year, revenue_category,
+        revenue_source, adopted, recognized,
+        budget_fiscal_year, funding_class, revenue_class,
+        fund_class, modified, closing_classification_name
         '''
         self.response_columns.update({name:name})
 
     def del_reponse_column(self,name):
         '''
         object.del_response_column('name')
+
+        Delete a response column filter for a specific object
         '''
         try:
             del self.response_columns[name]
@@ -615,6 +730,8 @@ class Revenue:
     def delete_criteria(self,name):
         '''
         object.del_criteria('name')
+
+        Delete a criteria filter for a specific object
         '''
         try:
             if name == 'max_records' or name == 'record_from':
@@ -628,6 +745,10 @@ class Revenue:
     def getRevenue(self):
         '''
         Call to Revenue API: object.getRevenue()
+
+        Get Revenue information
+
+        Returns text in XML format
         '''
         revenueString = ('<request><type_of_data>Revenue</type_of_data>')
         #Adding global criteria filters
@@ -693,7 +814,20 @@ class Spending:
 
     def add_criteria(self,name,valGlobDate,endDate=''):
         '''
-        object.add_criteria(criteria_name,value/startDate,endDate(OPTIONAL))
+        Values: object.add_criteria(crit_name,value))
+        Ranges: object.add_criteria(crit_name,startDate,endDate)
+
+
+        Values:
+        max_records , record_from,
+        fiscal_year OR calendar_year OR issue_date(Range),
+        payee_code, document_id, agency_code,
+        department_code, contract_id,
+        capital_project_code, spending_category
+
+        Ranges:
+        check_amount,
+        issue_date(choose this or fiscal_year/calendar_year)
         '''
         try:
             criteria_type = self.valGlobRange[name]
@@ -758,12 +892,21 @@ class Spending:
     def add_response_column(self,name):
         '''
         object.create_response_column('name')
+
+        Response columns:
+        agency, fiscal_year, spending_category,
+        document_id, payee_name, check_amount,
+        department, expense_category,
+        calendar_year, contract_id, purpose,
+        issue_date, capital_project
         '''
         self.response_columns.update({name:name})
 
     def del_reponse_column(self,name):
         '''
         object.del_response_column('name')
+
+        Delete an already created response column filter for a specific object
         '''
         try:
             del self.response_columns[name]
@@ -774,6 +917,8 @@ class Spending:
     def delete_criteria(self,name):
         '''
         object.del_criteria('name')
+
+        Delete an already created criteria filter for a specific object
         '''
         try:
             if name == 'max_records' or name == 'record_from':
@@ -787,6 +932,11 @@ class Spending:
     def getSpending(self):
         '''
         Call to Spending API: object.getSpending()
+
+        Get Spending information
+
+        Returns text in XML format
+        
         '''
         spendingString = ('<request><type_of_data>Spending</type_of_data>')
         #Adding global criteria filters
