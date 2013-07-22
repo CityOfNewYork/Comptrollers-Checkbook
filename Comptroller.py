@@ -43,8 +43,23 @@ class Budget:
                            'max_records':'global' , 'record_from':'global'
                             }
         self.criterias,self.global_criterias,self.response_columns = {},{},{}
-        
 
+    def getKey(self):
+        print self.key
+        return self.key
+    
+    def setKey(self,newKey):
+        print 'New Key:',newKey
+        self.key = newKey
+
+    def getID(self):
+        print self.ID
+        return self.ID
+    
+    def setID(self,newID)
+        print 'New ID:',newID
+        self.ID = newID
+    
     def add_criteria(self,name,valGlobDate,endDate=''):
         '''
         Values: object.add_criteria(crit_name,value))
@@ -228,6 +243,22 @@ class Contracts:
                              }
 
         self.criterias,self.global_criterias,self.response_columns = {},{},{}
+
+    def getKey(self):
+        print self.key
+        return self.key
+    
+    def setKey(self,newKey):
+        print 'New Key:',newKey
+        self.key = newKey
+
+    def getID(self):
+        print self.ID
+        return self.ID
+    
+    def setID(self,newID)
+        print 'New ID:',newID
+        self.ID = newID
 
     def add_criteria(self,name,valGlobDate,endDate=''):
         '''
@@ -443,8 +474,23 @@ class Payroll:
         #Setting default 
         self.criterias.update({'amount_type':'<criteria><name>amount_type</name><type>value</type>'+
                                '<value>ALL</value></criteria>'})
-                               
-                                    
+
+    def getKey(self):
+        print self.key
+        return self.key
+    
+    def setKey(self,newKey):
+        print 'New Key:',newKey
+        self.key = newKey
+
+    def getID(self):
+        print self.ID
+        return self.ID
+    
+    def setID(self,newID)
+        print 'New ID:',newID
+        self.ID = newID
+        
     def add_criteria(self,name,valGlobDate,endDate=''):
         '''
         Values: object.add_criteria(crit_name,value))
@@ -628,6 +674,22 @@ class Revenue:
 
         self.criterias,self.global_criterias,self.response_columns = {},{},{}
 
+    def getKey(self):
+        print self.key
+        return self.key
+    
+    def setKey(self,newKey):
+        print 'New Key:',newKey
+        self.key = newKey
+
+    def getID(self):
+        print self.ID
+        return self.ID
+    
+    def setID(self,newID)
+        print 'New ID:',newID
+        self.ID = newID
+        
     def add_criteria(self,name,valGlobDate,endDate=''):
         '''
         Values: object.add_criteria(crit_name,value))
@@ -812,6 +874,22 @@ class Spending:
 
         self.criterias,self.global_criterias,self.response_columns = {},{},{}
 
+    def getKey(self):
+        print self.key
+        return self.key
+    
+    def setKey(self,newKey):
+        print 'New Key:',newKey
+        self.key = newKey
+
+    def getID(self):
+        print self.ID
+        return self.ID
+    
+    def setID(self,newID)
+        print 'New ID:',newID
+        self.ID = newID
+        
     def add_criteria(self,name,valGlobDate,endDate=''):
         '''
         Values: object.add_criteria(crit_name,value))
