@@ -54,7 +54,7 @@ Sample XML requests and responses are included for each domain.
 <code>object.delete_criteria('name')<br /></code>
 <code>Budget.delete_critera('adopted')</code>
 
-<h3>Call to API for results(returned in text format):</h3>
+<h3>Call to API for results(returned in XML format):</h3>
 <p>&nbsp;<b>Note:</b> The call depends on the datatype you selected when creating your object</p>
 <code>MyBudgetObject.getBudget()</code><br />
 <code>MyContractsObject.getContracts()</code><br />
